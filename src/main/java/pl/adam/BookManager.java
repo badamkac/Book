@@ -1,40 +1,39 @@
 package pl.adam;
 
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class BookManager {
-    public static void main(String[] args) throws IOException {
-        Book book = new Book();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        boolean programStart = true;
-        while (programStart) {
-            System.out.println("Wybierz co chcesz zrobić: \n 1. Dodaj książkę \n 2. Wyświetl spis książek \n 3. Wyszukaj książkę po tytule \n 4. Zakończ");
-            String choice = reader.readLine();
-            switch (choice) {
-                case "1":
-                    System.out.println("Wpisz tytuł książki:");
-                    book.addBook(reader.readLine());
-                    System.out.println("Książka dodana poprawnie!");
-                    break;
-                case "2":
-                    System.out.println("Spis książek:");
-                    book.displayList();
-                    break;
-                case "3":
-                    System.out.println("Wpisz tytuł książki, której szukasz:");
-                    book.findBook(reader.readLine());
-                    break;
-                case "4":
-                    programStart = false;
-                    break;
-                default:
-                    System.out.println("Błąd!  Wpisz na ekran cyfre od 1 - 4");
-                    break;
+    ArrayList<Book> bookList = new ArrayList<>();
+
+    public void addBook(String bookName, String author) {
+        Book book = new Book(bookName, author);
+        bookList.add(book);
+    }
+
+    public void displayList() {
+        for (int i = 0; i < bookList.size(); i++) {
+            System.out.println(i + 1 + "." + " " + bookList.get(i));
+        }
+    }
+
+    public void findBook(String bookName, String bookAuthor) {
+        boolean isThere = false;
+        for (Book book : bookList) {
+            if (book.getTitle().equalsIgnoreCase(bookName) && book.getAuthor().equalsIgnoreCase(bookAuthor)) {
+                isThere = true;
+                break;
             }
         }
+        if (isThere){
+            System.out.println("Twoja książka jest w spisie");
+        }else{
+            System.out.println("Nie znaleziono książki o podanym tytule");
+        }
+//        if (bookList.contains(bookName)) {
+//            System.out.println("Twoja książka jest w spisie na miejscu " + (bookList.indexOf(bookName) + 1));
+//        } else {
+//            System.out.println("Nie znaleziono książki o podanym tytule");
+//        }
     }
 }
