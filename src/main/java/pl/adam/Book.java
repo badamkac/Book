@@ -1,12 +1,17 @@
 package pl.adam;
 
+import java.util.UUID;
+
 public class Book {
     private final String title;
     private final String author;
+    private final UUID isbn;
 
-    public Book(String title, String author){
-        this.title = title;
-        this.author = author;
+
+    public Book(String title, String author, UUID isbn) {
+        this.title = title.toUpperCase();
+        this.author = author.toUpperCase();
+        this.isbn = isbn;
     }
 
     public String getTitle() {
@@ -17,11 +22,12 @@ public class Book {
         return author;
     }
 
+    public UUID getIsbn() {
+        return isbn;
+    }
+
     @Override
     public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                '}';
+        return "Tytuł: " + title + " Author: " + author + " ISBN: " + isbn;
     }
 }
