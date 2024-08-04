@@ -28,15 +28,15 @@ public class BookManagerConsole {
                     break;
                 case "3":
                     System.out.println("Wpisz tytuł książki, której szukasz:");
-                    bookManager.searchBookByTitle(reader.readLine());
+                    System.out.println(bookManager.searchBookByTitle(reader.readLine()));
                     break;
                 case "4":
                     System.out.println("Wpisz autora książki:");
-                    bookManager.searchBookByAuthor(reader.readLine());
+                    System.out.println(bookManager.searchBookByAuthor(reader.readLine()));
                     break;
                 case "5":
                     System.out.println("Wpisz numer ISBN książki:");
-                    bookManager.searchBookByIsbn(reader.readLine());
+                    System.out.println(bookManager.searchBookByIsbn(reader.readLine()));
                     break;
                 case "6":
                     programStart = false;
