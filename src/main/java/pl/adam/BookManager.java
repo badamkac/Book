@@ -7,12 +7,13 @@ public class BookManager {
 
     ArrayList<Book> bookList = new ArrayList<>();
 
-    public void addBook(String bookName, String author, UUID isbn) {
-        Book book = new Book(bookName, author, isbn);
+    public void addBook(String bookName, String author) {
+        String id = UUID.randomUUID().toString();
+        Book book = new Book(bookName, author, id);
         bookList.add(book);
     }
 
-    public void displayLastAddedBook(){
+    public void displayLastAddedBook() {
         System.out.println(bookList.get(bookList.size() - 1));
     }
 
@@ -22,43 +23,33 @@ public class BookManager {
         }
     }
 
-    public void searchBookByTitle(String bookName) {
-        boolean isThere = false;
+    public ArrayList<Book> searchBookByTitle(String bookName) {
+        ArrayList<Book> titleList = new ArrayList<>();
         for (Book book : bookList) {
             if (book.getTitle().equalsIgnoreCase(bookName)) {
-                System.out.println(book);
-                isThere = true;
+                titleList.add(book);
             }
         }
-        if (!isThere){
-            System.out.println("Nie znaleziono książki o podanym tytule");
-        }
+        return titleList;
     }
 
-    public void searchBookByAuthor(String author) {
-        boolean isThere = false;
+    public ArrayList<Book> searchBookByAuthor(String author) {
+        ArrayList<Book> authorList = new ArrayList<>();
         for (Book book : bookList) {
             if (book.getAuthor().equalsIgnoreCase(author)) {
-                System.out.println(book);
-                isThere = true;
+                authorList.add(book);
             }
         }
-        if (!isThere){
-            System.out.println("W spisie nie ma ksiażek tego autora");
-        }
+        return authorList;
     }
 
-    public void searchBookByIsbn(String isbn) {
-        boolean isThere = false;
+    public Book searchBookByIsbn(String isbn) {
         for (Book book : bookList) {
-            if (book.getIsbn().toString().equalsIgnoreCase(isbn)) {
-                System.out.println(book);
-                isThere = true;
+            if (book.getIsbn().equalsIgnoreCase(isbn)) {
+                return book;
             }
         }
-        if (!isThere){
-            System.out.println("W spisie nie ma ksiażki o podanym ISBN");
-        }
+        return null;
     }
 
     public void findBook(String bookName, String bookAuthor) {
@@ -69,9 +60,9 @@ public class BookManager {
                 break;
             }
         }
-        if (isThere){
+        if (isThere) {
             System.out.println("Twoja książka jest w spisie");
-        }else{
+        } else {
             System.out.println("Nie znaleziono książki o podanym tytule");
         }
     }
