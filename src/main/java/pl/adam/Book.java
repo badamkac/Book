@@ -1,5 +1,6 @@
 package pl.adam;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Book {
@@ -9,8 +10,8 @@ public class Book {
 
 
     public Book(String title, String author, String isbn) {
-        this.title = title.toUpperCase();
-        this.author = author.toUpperCase();
+        this.title = title;
+        this.author = author;
         this.isbn = isbn;
     }
 
@@ -24,6 +25,19 @@ public class Book {
 
     public String getIsbn() {
         return isbn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(isbn, book.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, isbn);
     }
 
     @Override

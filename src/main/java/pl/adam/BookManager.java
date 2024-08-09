@@ -52,18 +52,18 @@ public class BookManager {
         return null;
     }
 
-    public void findBook(String bookName, String bookAuthor) {
-        boolean isThere = false;
+    public Book findBook(String bookName, String bookAuthor) {
         for (Book book : bookList) {
             if (book.getTitle().equalsIgnoreCase(bookName) && book.getAuthor().equalsIgnoreCase(bookAuthor)) {
-                isThere = true;
-                break;
+                return book;
             }
         }
-        if (isThere) {
-            System.out.println("Twoja książka jest w spisie");
-        } else {
-            System.out.println("Nie znaleziono książki o podanym tytule");
-        }
+        return null;
+    }
+
+    public void editBookByIsbn(String isbn, String newBookName, String newAuthor){
+        Book newBook = new Book(newBookName,newAuthor,isbn);
+        bookList.remove(searchBookByIsbn(isbn));
+        bookList.add(newBook);
     }
 }
