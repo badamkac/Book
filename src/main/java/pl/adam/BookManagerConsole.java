@@ -18,7 +18,7 @@ public class BookManagerConsole {
             switch (choice) {
                 case "1":
                     System.out.println("Wpisz tytuł a następnie autora książki:");
-                    bookManager.addBook(reader.readLine(), reader.readLine(),UUID.randomUUID());
+                    bookManager.addBook(reader.readLine(), reader.readLine());
                     bookManager.displayLastAddedBook();
                     System.out.println("Wprowadzona poprawnie");
                     break;

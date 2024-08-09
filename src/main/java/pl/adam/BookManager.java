@@ -7,8 +7,9 @@ public class BookManager {
 
     ArrayList<Book> bookList = new ArrayList<>();
 
-    public void addBook(String bookName, String author, UUID isbn) {
-        Book book = new Book(bookName, author, isbn);
+    public void addBook(String bookName, String author) {
+        String id = UUID.randomUUID().toString();
+        Book book = new Book(bookName, author, id);
         bookList.add(book);
     }
 
@@ -22,36 +23,30 @@ public class BookManager {
         }
     }
 
-    public ArrayList<String> searchBookByTitle(String bookName) {
-        ArrayList<String> titleList = new ArrayList<>();
+    public ArrayList<Book> searchBookByTitle(String bookName) {
+        ArrayList<Book> titleList = new ArrayList<>();
         for (Book book : bookList) {
             if (book.getTitle().equalsIgnoreCase(bookName)) {
-                titleList.add(book.toString());
+                titleList.add(book);
             }
         }
-        if (!titleList.isEmpty()) {
-            return titleList;
-        }
-        return null;
+        return titleList;
     }
 
-    public ArrayList<String> searchBookByAuthor(String author) {
-        ArrayList<String> authorList = new ArrayList<>();
+    public ArrayList<Book> searchBookByAuthor(String author) {
+        ArrayList<Book> authorList = new ArrayList<>();
         for (Book book : bookList) {
             if (book.getAuthor().equalsIgnoreCase(author)) {
-                authorList.add(book.toString());
+                authorList.add(book);
             }
         }
-        if (!authorList.isEmpty()) {
-            return authorList;
-        }
-        return null;
+        return authorList;
     }
 
-    public String searchBookByIsbn(String isbn) {
+    public Book searchBookByIsbn(String isbn) {
         for (Book book : bookList) {
-            if (book.getIsbn().toString().equalsIgnoreCase(isbn)) {
-                return book.toString();
+            if (book.getIsbn().equalsIgnoreCase(isbn)) {
+                return book;
             }
         }
         return null;

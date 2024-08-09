@@ -5,10 +5,10 @@ import java.util.UUID;
 public class Book {
     private final String title;
     private final String author;
-    private final UUID isbn;
+    private final String isbn;
 
 
-    public Book(String title, String author, UUID isbn) {
+    public Book(String title, String author, String isbn) {
         this.title = title.toUpperCase();
         this.author = author.toUpperCase();
         this.isbn = isbn;
@@ -22,7 +22,7 @@ public class Book {
         return author;
     }
 
-    public UUID getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
