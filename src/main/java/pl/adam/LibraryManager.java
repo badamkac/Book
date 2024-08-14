@@ -3,9 +3,38 @@ package pl.adam;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class BookManager {
+public class LibraryManager {
 
     ArrayList<Book> bookList = new ArrayList<>();
+    ArrayList<Book> loanBookList = new ArrayList<>();
+    ArrayList<User> userList = new ArrayList<>();
+
+    //User Manager
+    public void addUser(String userFirstName, String userLastName, String userID){
+        User user = new User(userFirstName, userLastName, userID);
+        userList.add(user);
+    }
+
+    public User searchUserById(String userID){
+        for (User user : userList){
+            if(user.getUserID().equalsIgnoreCase(userID)){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public void displayCurrentUser() {
+        System.out.println(userList.get(userList.size() - 1));
+    }
+
+
+    //Book Manager
+
+    public void loanBook(User user, ArrayList<Book> loanBookList){
+        Loan loan = new Loan();
+        loan.loanMap.put(user, loanBookList);
+    }
 
     public void addBook(String bookName, String author) {
         String id = UUID.randomUUID().toString();
@@ -17,9 +46,9 @@ public class BookManager {
         System.out.println(bookList.get(bookList.size() - 1));
     }
 
-    public void displayList() {
-        for (int i = 0; i < bookList.size(); i++) {
-            System.out.println(i + 1 + "." + " " + bookList.get(i));
+    public void displayList(ArrayList<Book> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i + 1 + "." + " " + list.get(i));
         }
     }
 
