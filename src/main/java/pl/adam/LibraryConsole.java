@@ -23,10 +23,10 @@ public class LibraryConsole {
                     System.out.println("Wprowadzona poprawnie");
                     break;
                 case "2":
-                    System.out.println("Spis książek dostępnych:");
-                    libraryManager.displayList(libraryManager.bookList);
-                    System.out.println("Książki wypożyczone:");
-                    libraryManager.displayList(libraryManager.loanBookList);
+//                    System.out.println("Spis książek dostępnych:");
+//                    libraryManager.displayList(libraryManager.bookList);
+//                    System.out.println("Książki wypożyczone:");
+//                    libraryManager.displayList(libraryManager.loanBookList);
                     break;
                 case "3":
                     System.out.println("Wprowadź imie, nazwisko i PESEL:");
@@ -39,10 +39,10 @@ public class LibraryConsole {
                     System.out.println(currentUser);
                     System.out.println("Wprowadź tytuł i autora książki, którą chcesz wypożyczyć:");
                     Book loanBook = libraryManager.findBook(reader.readLine(), reader.readLine());
-                    libraryManager.loanBookList.add(loanBook);
-                    libraryManager.bookList.remove(loanBook);
-                    libraryManager.loanBook(currentUser,libraryManager.loanBookList);
-                    loanInformation.loanMap.put(currentUser,libraryManager.loanBookList);
+//                    libraryManager.loanBookList.add(loanBook);
+//                    libraryManager.bookList.remove(loanBook);
+//                    libraryManager.loanBook(currentUser,libraryManager.loanBookList);
+//                    loanInformation.loanMap.put(currentUser,libraryManager.loanBookList);
                     break;
                 case "5":
                     System.out.println("Wprowadź PESEL użytkownika:");
@@ -50,9 +50,9 @@ public class LibraryConsole {
                     System.out.println(currentUser);
                     System.out.println("Wprowadź tytuł i autora książki, którą chcesz zwrócić:");
                     loanBook = libraryManager.findBook(reader.readLine(), reader.readLine());
-                    libraryManager.bookList.add(loanBook);
-                    libraryManager.loanBookList.remove(loanBook);
-                    libraryManager.loanBook(currentUser,libraryManager.loanBookList);
+//                    libraryManager.bookList.add(loanBook);
+//                    libraryManager.loanBookList.remove(loanBook);
+//                    libraryManager.loanBook(currentUser,libraryManager.loanBookList);
                     break;
                 case "6":
                     System.out.println("Wpisz tytuł książki, której szukasz:");

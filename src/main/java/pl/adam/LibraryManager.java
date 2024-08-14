@@ -5,9 +5,10 @@ import java.util.UUID;
 
 public class LibraryManager {
 
-    ArrayList<Book> bookList = new ArrayList<>();
-    ArrayList<Book> loanBookList = new ArrayList<>();
-    ArrayList<User> userList = new ArrayList<>();
+    private final ArrayList<Book> bookList = new ArrayList<>();
+    private final ArrayList<Book> loanBookList = new ArrayList<>();
+    private final ArrayList<User> userList = new ArrayList<>();
+    private final Loan loan = new Loan();
 
     //User Manager
     public void addUser(String userFirstName, String userLastName, String userID){
@@ -32,8 +33,7 @@ public class LibraryManager {
     //Book Manager
 
     public void loanBook(User user, ArrayList<Book> loanBookList){
-        Loan loan = new Loan();
-        loan.loanMap.put(user, loanBookList);
+//        loan.loanMap.put(user, loanBookList);
     }
 
     public void addBook(String bookName, String author) {
