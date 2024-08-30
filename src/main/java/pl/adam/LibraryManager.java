@@ -6,19 +6,20 @@ import java.util.UUID;
 public class LibraryManager {
 
     private final ArrayList<Book> bookList = new ArrayList<>();
-    private final ArrayList<Book> loanBookList = new ArrayList<>();
     private final ArrayList<User> userList = new ArrayList<>();
     private final Loan loan = new Loan();
 
     //User Manager
-    public void addUser(String userFirstName, String userLastName, String userID){
-        User user = new User(userFirstName, userLastName, userID);
-        userList.add(user);
+    public User addUser(String userFirstName, String userLastName, String pesel){
+        User user = new User(userFirstName, userLastName, pesel);
+        if (searchUserById(pesel) == null)
+            userList.add(user);
+        return user;
     }
 
     public User searchUserById(String userID){
         for (User user : userList){
-            if(user.getUserID().equalsIgnoreCase(userID)){
+            if(user.getPesel().equalsIgnoreCase(userID)){
                 return user;
             }
         }
@@ -29,17 +30,36 @@ public class LibraryManager {
         System.out.println(userList.get(userList.size() - 1));
     }
 
+    public ArrayList<User> getAllUsers() {
+        return userList;
+    }
+
 
     //Book Manager
 
-    public void loanBook(User user, ArrayList<Book> loanBookList){
-//        loan.loanMap.put(user, loanBookList);
+    public void loanBook(String userID, String bookIsbn){
+        User user = searchUserById(userID);
+        Book book = searchBookByIsbn(bookIsbn);
+        bookList.remove(book);
+        loan.addBook(user, book);
     }
 
-    public void addBook(String bookName, String author) {
+    public void returnBook(String userID, String bookIsbn) {
+        User user = searchUserById(userID);
+        Book book = searchLoanedBookByIsbn(bookIsbn, user);
+        loan.removeBook(user, book);
+        bookList.add(book);
+    }
+
+    public ArrayList<Book> getLoanedBooks(User user){
+        return loan.getBooks(user);
+    }
+
+    public Book addBook(String bookName, String author) {
         String id = UUID.randomUUID().toString();
         Book book = new Book(bookName, author, id);
         bookList.add(book);
+        return book;
     }
 
     public void displayLastAddedBook() {
@@ -81,6 +101,16 @@ public class LibraryManager {
         return null;
     }
 
+    public Book searchLoanedBookByIsbn(String isbn, User user) {
+        for (Book book : getLoanedBooks(user)) {
+            if (book.getIsbn().equalsIgnoreCase(isbn)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+
     public Book findBook(String bookName, String bookAuthor) {
         for (Book book : bookList) {
             if (book.getTitle().equalsIgnoreCase(bookName) && book.getAuthor().equalsIgnoreCase(bookAuthor)) {
@@ -95,4 +125,6 @@ public class LibraryManager {
         bookList.remove(searchBookByIsbn(isbn));
         bookList.add(newBook);
     }
+
+
 }
